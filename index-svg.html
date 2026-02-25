@@ -32,15 +32,17 @@
 
   makeCode();
 
-  document.getElementById("text").
-      on("blur", function () {
-          makeCode();
-      }).
-      on("keydown", function (e) {
-          if (e.keyCode == 13) {
-              makeCode();
-          }
-      });
+  window.onload = function() {
+	 var elText = document.getElementById("text");
+	 elText.addEventListener("blur", function () {
+		  makeCode();
+	 });
+	 elText.addEventListener("keydown", function (e) {
+		  if (e.keyCode == 13) {
+		      makeCode();
+		  }
+	 });
+  };
     </script>
   </body>
 </html>
