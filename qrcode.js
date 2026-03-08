@@ -523,8 +523,6 @@ var QRCode;
 	 * @example
 	 * var oQRCode = new QRCode("test", {
 	 *    text : "http://naver.com",
-	 *    width : 128,
-	 *    height : 128
 	 * });
 	 * 
 	 * oQRCode.clear(); // Clear the QRCode.
@@ -540,15 +538,19 @@ var QRCode;
 	 * @param {QRCode.CorrectLevel} [vOption.correctLevel=QRCode.CorrectLevel.H] [L|M|Q|H] 
 	 */
 	QRCode = function (el, vOption) {
+		console.debug("QR element height " + el.offsetHeight +
+			      ", width: " + el.offsetWidth);
 		this._htOption = {
-			width : 256, 
-			height : 256,
+			width : el.offsetWidth || 256,
+			height : el.offsetHeight || 256,
 			typeNumber : 4,
 			colorDark : "#000000",
 			colorLight : "#ffffff",
 			correctLevel : QRErrorCorrectLevel.H
 		};
-		
+		console.debug("QR code initial height " +
+			      this._htOption.height +
+			      ", width: " + this._htOption.width);
 		if (typeof vOption === 'string') {
 			vOption	= {
 				text : vOption
@@ -561,6 +563,8 @@ var QRCode;
 				this._htOption[i] = vOption[i];
 			}
 		}
+		console.debug("QR code final height " + this._htOption.height +
+			      ", width: " + this._htOption.width);
 		
 		if (typeof el == "string") {
 			el = document.getElementById(el);
